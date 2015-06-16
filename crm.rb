@@ -1,4 +1,6 @@
+require_relative 'contact'
 require 'sinatra'
+
 
 get '/' do    # Route
   @crm_app_name = "My CRM"
