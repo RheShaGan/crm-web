@@ -1,0 +1,19 @@
+h1 {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 28px;
+background-color: #328924;
+color: #FFFFFF;
+
+}
+
+
+li { 
+  font-family: Times, "Times New Roman", Georgia, serif;
+  font-size: 18px;
+  color: darkmagenta;
+  font-weight: bold;
+}
+
+body{
+  background-color: #66CCFF;
+}
