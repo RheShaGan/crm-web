@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-  </head>
-  <body>
-    <%= yield %>
-  </body>
+    <head>
+      <meta charset="UTF-8">
+      <title>Document</title>
+    </head>
+    <body>
+    <header><%= Time.now %></header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/contacts">All Contacts</a></li>
+      </ul>
+    </nav>
+      <%= yield %>
+      <footer>You are using My CRM!</footer>
+    </body>
 </html>
