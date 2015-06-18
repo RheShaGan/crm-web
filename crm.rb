@@ -22,7 +22,7 @@ get "/contacts/new" do
   erb :new_contact
 end
 
-get "/contacts/:id" do
+get "/contacts/:id/show_contact" do
   @contact = $rolodex.search_contact(params[:id].to_i)
   if @contact
     erb :show_contact
