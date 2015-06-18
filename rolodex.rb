@@ -91,8 +91,7 @@ class Rolodex
 
     puts "Contact has been deleted successfully."
 
-
-    
+    remove    
   end
 
 end
