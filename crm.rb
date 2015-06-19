@@ -1,5 +1,4 @@
 require_relative 'rolodex'
-require_relative 'contact'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'data_mapper'
@@ -7,6 +6,25 @@ require 'data_mapper'
 DataMapper.setup(:default, "sqlite3:database.sqlite3")
 
 $rolodex ||= Rolodex.new
+
+class Contact
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :first_name, String
+  property :last_name, String
+  property :email, String
+  property :notes, Text
+
+  DataMapper.finalize
+  DataMapper.auto_upgrade!
+  end
+
+  def to_s
+    "#{@id}--#{@first_name} #{@last_name} --#{@email}--#{@notes}"
+  
+  end
+end
 
 get '/' do    # Route
   @crm_app_name = "My CRM"
