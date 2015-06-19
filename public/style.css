@@ -1,6 +1,6 @@
 h1 {
 font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 28px;
+font-size: 30px;
 background-color: #328924;
 color: #FFFFFF;
 
@@ -8,6 +8,7 @@ color: #FFFFFF;
 
 
 li { 
+  padding-bottom: 5px; 
   font-family: Times, "Times New Roman", Georgia, serif;
   font-size: 18px;
   color: darkmagenta;
@@ -15,6 +16,17 @@ li {
 }
 
 body{
-  background-color: #66CCFF;
+  background-color: #CCFFCC;
 }
 
+a{
+  text-decoration: none;
+}
+
+button{
+  float: right;
+  padding: 5px;
+  margin: 1px;
+  font-weight: bold;
+  background-color: 
+}

@@ -16,11 +16,6 @@ class Contact
   property :email, String
   property :notes, Text
   
-
-  def to_s
-    "#{@id}--#{@first_name} #{@last_name} --#{@email}--#{@notes}"
-  
-  end
 end
 
 DataMapper.finalize
@@ -33,10 +28,7 @@ get '/' do    # Route
 end
 
 get "/contacts" do
-  # @contacts << Contact.new("Yehuda", "Katz", "yehuda@example.com", "Developer")
-  # @contacts << Contact.new("Mark", "Zuckerberg", "mark@facebook.com", "CEO")
-  # @contacts << Contact.new("Sergey", "Brin", "sergey@google.com", "Co-Founder")
-
+  @contacts = Contact.all
   erb :contacts
 end
 
@@ -44,64 +36,69 @@ get "/contacts/new" do
   erb :new_contact
 end
 
-# #get "/contacts/:id/show_contact" do
-#   @contact = $rolodex.search_contact(params[:id].to_i)
-#   if @contact
-#     erb :show_contact
-#   else
-#     raise Sinatra::NotFound
-#   end
-# end
+get "/contacts/:id/show_contact" do
+  @contact = Contact.get(params[:id].to_i)
+  if @contact
+    erb :show_contact
+  else
+    raise Sinatra::NotFound
+  end
+end
 
-# get "/contacts/:id/edit" do
-#   @contact = $rolodex.search_contact(params[:id].to_i)
-#   if @contact
-#       erb :edit_contact
-#   else
-#     raise Sinatra::NotFound
-#   end
-# end
+get "/contacts/:id/edit" do
+  @contact = Contact.get(params[:id].to_i)
+  if @contact
+      erb :edit_contact
+  else
+    raise Sinatra::NotFound
+  end
+end
 
-# get "/contacts/:id/delete" do
-#   @contact = $rolodex.search_contact(params[:id].to_i)
-#   if @contact
-#       erb :delete_contact
-#   else
-#     raise Sinatra::NotFound
-#   end
-# end
+get "/contacts/:id/delete" do
+  @contact = Contact.get(params[:id].to_i)
+  if @contact
+      erb :delete_contact
+  else
+    raise Sinatra::NotFound
+  end
+end
 
 
 # end of file
-# post '/contacts' do
-#   #new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
-#   $rolodex.add_contact(params[:first_name], params[:last_name], params[:email], params[:note])
-#   redirect to('/contacts')
-# end
+post '/contacts' do
+  contact = Contact.first_or_create(
+    :first_name => params[:first_name],
+    :last_name => params[:last_name],
+    :email => params[:email],
+    :notes => params[:notes]
+    )
+    
+  redirect to('/contacts')
+end
 
-# put "/contacts/:id" do
-#   @contact = $rolodex.search_contact(params[:id].to_i)
-#   if @contact
-#     @contact.first_name = params[:first_name]
-#     @contact.last_name = params[:last_name]
-#     @contact.email = params[:email]
-#     @contact.notes = params[:notes]
+put "/contacts/:id" do
+  @contact = Contact.get(params[:id].to_i)
+  if @contact
+   
+    @contact.update(first_name: params[:first_name], last_name: params[:last_name], email: params[:email], notes: params[:notes])
+  # @contact.save
 
-#     redirect to("/contacts")
-#   else
-#     raise Sinatra::NotFound
-#   end
-# end
+    redirect to("/contacts")
+  else
+    raise Sinatra::NotFound
+  end
+end
 
-# delete "/contacts/:id" do
-#   @contact = $rolodex.delete_contact(params[:id].to_i)
-#   if @contact
-#     $rolodex.delete_contact(@contact)
-#     redirect to("/contacts")
-#   else
-#     raise Sinatra::NotFound
-#   end
-# end
+delete "/contacts/:id" do
+  @contact = Contact.get(params[:id].to_i)
+  if @contact
+    @contact.destroy
+
+    redirect to("/contacts")
+  else
+    raise Sinatra::NotFound
+  end
+end
 
 
 
