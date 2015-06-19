@@ -1,4 +1,4 @@
-require_relative('contact.rb')
+# require_relative('contact.rb')
 
 
 class Rolodex
